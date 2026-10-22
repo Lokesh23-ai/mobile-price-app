@@ -5,9 +5,17 @@ import joblib
 st.set_page_config(page_title="Mobile Price Predictor", page_icon="📱")
 
 
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
 @st.cache_resource
 def load():
-    return joblib.load("model.pkl"), joblib.load("columns.pkl")
+    return (
+        joblib.load(os.path.join(BASE_DIR, "model.pkl")),
+        joblib.load(os.path.join(BASE_DIR, "columns.pkl")),
+    )
 
 
 model, columns = load()
